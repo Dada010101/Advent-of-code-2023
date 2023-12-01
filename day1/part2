@@ -3,7 +3,7 @@ import re
 with open('data.txt', 'r') as file:
     lines = file.readlines()
 
-lettersToNmb = {
+lettersToNumber = {
     "one": 1,
     "two": 2,
     "three": 3,
@@ -15,22 +15,22 @@ lettersToNmb = {
     "nine": 9
 }
 totalSum = 0
-wordPos = []
+wordPosition = []
+
 for line in lines:
-
     index = []
-    for znak in line:
-        if znak.isdigit():
-            iNmb = line.index(znak)
-            index.append((iNmb, int(znak)))
+    for x in line:
+        if x.isdigit():
+            iNmb = line.index(x)
+            index.append((iNmb, int(x)))
 
-    for word, number in lettersToNmb.items():
+    for word, number in lettersToNumber.items():
         occurrences = re.finditer(word, line)
         for occurrence in occurrences:
             start = occurrence.start()
-            wordPos.append((number))
+            wordPosition.append((number))
 
-    index.sort(key=lambda x: x[0])  # Sortiraj prema prvom elementu tuple-a
+    index.sort(key=lambda x: x[0])
     print(index)
 
     numbers = [v for _, v in index]
