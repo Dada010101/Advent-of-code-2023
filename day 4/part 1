@@ -1,0 +1,24 @@
+totalPoints = 0
+with open("data.txt") as file:
+    for line in file:
+        parts = line.split('|')
+
+        winningNmb = [int(num) for num in parts[0].split()[2:]]
+        myNmb = [int(num) for num in parts[1].split()]
+
+        setWinNmb = set(winningNmb)
+        setMyNmb = set(myNmb)
+
+        firstMatch = True
+        points = 0
+        for number in setWinNmb:
+            if number in setMyNmb:
+                if firstMatch:
+                    firstMatch = False
+                    points = 1
+                    continue
+                points *= 2
+
+        totalPoints += points
+
+print(f"Total points: {totalPoints}")
