@@ -1,0 +1,23 @@
+
+sumCards = 0
+with open("data.txt") as file:
+    lines = file.read().split('\n')
+    copies = [1] * len(lines)
+
+    for i, line in enumerate(lines):
+
+        _, data = line.split(':')
+        winningCards, myCards = data.strip().split('|')
+
+        winning = winningCards.strip().replace('  ', ' ').split(' ')
+        my = myCards.strip().replace('  ', ' ').split(' ')
+
+        winsNmb = sum(1 for n in my if n in winning)
+
+        for _ in range(copies[i]):
+            for j in range(winsNmb):
+                copies[i + j + 1] += 1
+
+    sumCards = sum(copies)
+
+print(sumCards)
