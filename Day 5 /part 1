@@ -1,0 +1,20 @@
+with open('data.txt', 'r') as file:
+    line = file.read()
+
+parts = [part for part in line.split('\n\n')]
+seeds = parts.pop(0).split()[1:]
+
+lowest = float('inf')  
+for seed in seeds:
+    num = int(seed)
+    for part in parts:
+        lines = part.split('\n')
+        for line in lines[1:]:
+            dest, sourc, range = map(int, line.split())
+            if sourc < num < sourc + range:
+                num = dest + (num - sourc)
+                break
+
+    lowest = min(lowest, num)
+
+print(lowest)
